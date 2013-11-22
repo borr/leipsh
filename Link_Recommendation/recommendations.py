@@ -70,6 +70,14 @@ def sim_pearson(prefs,p1,p2):
 
   return r
 
+def tanamoto(prefs,p1,p2):
+  c1,c2,shr=0,0,0
+  for i in range(len(prefs[p1])):
+    if prefs[p1].values()[i]!=0.0: c1+=1
+    if prefs[p2].values()[i]!=0.0: c2+=1
+    if prefs[p1].values()[i]!=0.0 and prefs[p2].values()[i]!=0.0: shr+=1
+  return (float(shr)/(c1+c2-shr))
+
 # Returns the best matches for person from the prefs dictionary. 
 # Number of results and similarity function are optional params.
 def topMatches(prefs,person,n=5,similarity=sim_pearson):
@@ -78,6 +86,7 @@ def topMatches(prefs,person,n=5,similarity=sim_pearson):
   scores.sort()
   scores.reverse()
   return scores[0:n]
+
 
 # Gets recommendations for a person by using a weighted average
 # of every other user's rankings
